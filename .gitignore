@@ -1,7 +1,7 @@
-*.gradle
 *.bat
 *.class
 gradlew
+*.log
 
 build/
 .idea/
