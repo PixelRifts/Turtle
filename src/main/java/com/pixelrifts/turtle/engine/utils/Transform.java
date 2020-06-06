@@ -41,6 +41,16 @@ public class Transform {
 		RecalculateMatrix();
 	}
 
+	public void SetTranslation(float dx, float dy) {
+		position.set(dx, dy);
+		RecalculateMatrix();
+	}
+
+	public void SetScale(float sx, float sy) {
+		scale.set(sx, sy);
+		RecalculateMatrix();
+	}
+
 	public void Translate(Vector2f d) {
 		position.add(d);
 		RecalculateMatrix();

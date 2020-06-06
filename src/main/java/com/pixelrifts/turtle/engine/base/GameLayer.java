@@ -48,8 +48,5 @@ public class GameLayer extends Layer {
 	@Override
 	public void OnImGuiRender() {
 		gameScene.ImGuiRender();
-		ImGui.begin("TESTING");
-		ImGui.dragFloat("Hi", value);
-		ImGui.end();
 	}
 }

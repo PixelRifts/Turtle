@@ -16,11 +16,12 @@ public class GameScene extends Scene {
 	public void StartScene() {
 		Texture texture = Texture.Find("src/main/resources/smiley.png");
 		GameObject a = new GameObject("Test");
+
 		a.transform.SetScale(new Vector2f(100, 100));
 		a.AttachComponent (
 				new SpriteRenderer()
-				.WithTexture(texture)
-				.WithMixColour(new Vector4f(0.2f, 0.3f, 0.8f, 1.0f))
+					.WithTexture(texture)
+					.WithMixColour(new Vector4f(0.2f, 0.3f, 0.8f, 1.0f))
 		);
 		AddGameObjectToScene(a);
 
