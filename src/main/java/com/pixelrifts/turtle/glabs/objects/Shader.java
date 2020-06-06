@@ -17,8 +17,8 @@ public class Shader {
 	
 	public Shader(String name) {
 		programID = glCreateProgram();
-		int vsID = LoadShader("./res/shaders/" + name + "V.glsl", GL_VERTEX_SHADER);
-		int fsID = LoadShader("./res/shaders/" + name + "F.glsl", GL_FRAGMENT_SHADER);
+		int vsID = LoadShader("src/main/resources/shaders/" + name + "V.glsl", GL_VERTEX_SHADER);
+		int fsID = LoadShader("src/main/resources/shaders/" + name + "F.glsl", GL_FRAGMENT_SHADER);
 		glAttachShader(programID, vsID);
 		glAttachShader(programID, fsID);
 		glLinkProgram(programID);

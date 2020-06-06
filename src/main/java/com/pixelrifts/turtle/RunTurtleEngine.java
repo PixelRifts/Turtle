@@ -1,5 +1,7 @@
 package com.pixelrifts.turtle;
 
+import com.pixelrifts.turtle.engine.base.GameLayer;
+import com.pixelrifts.turtle.engine.rendering.Renderer;
 import com.pixelrifts.turtle.glabs.base.Application;
 import com.pixelrifts.turtle.glabs.base.Display;
 import com.pixelrifts.turtle.imgui.ImGuiLayer;
@@ -15,6 +17,7 @@ public class RunTurtleEngine {
 		ImGuiLayer imGui = new ImGuiLayer();
 		imGui.Init();
 
+		app.PushLayer(new GameLayer());
 		app.PushLayer(imGui);
 
 		long lastTime = System.nanoTime();
@@ -36,7 +39,9 @@ public class RunTurtleEngine {
 				updates++;
 				delta--;
 			}
+			Renderer.Begin();
 			app.Render();
+			Renderer.End();
 
 			imGui.StartFrame((float) delta);
 			app.ImGuiRender();
@@ -55,6 +60,7 @@ public class RunTurtleEngine {
 
 		imGui.Terminate();
 
+		app.PopLayer();
 		app.PopLayer();
 
 		Display.DestroyWindow();

@@ -16,7 +16,7 @@ public class Texture {
 
 	private int m_TexSlot;
 
-	private static HashMap<String, Texture> textures;
+	private static final HashMap<String, Texture> textures;
 
 	static {
 		textures = new HashMap<>();
