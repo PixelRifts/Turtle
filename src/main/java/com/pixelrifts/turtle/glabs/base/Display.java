@@ -17,7 +17,7 @@ public class Display {
 	}
 
 	public static void CreateWindow(Application app) {
-		Window = glfwCreateWindow(Application.getWidth(), Application.getHeight(), app.getTitle(), 0, 0);
+		Window = glfwCreateWindow(Application.GetWidth(), Application.GetHeight(), app.GetTitle(), 0, 0);
 		s_App = app;
 		glfwMakeContextCurrent(Window);
 		GL.createCapabilities();

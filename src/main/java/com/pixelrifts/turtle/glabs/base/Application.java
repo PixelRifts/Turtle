@@ -31,15 +31,15 @@ public class Application {
 		m_LayerStack.PropagateImGuiRender();
 	}
 
-	public static int getWidth() {
+	public static int GetWidth() {
 		return m_Width;
 	}
 	
-	public static int getHeight() {
+	public static int GetHeight() {
 		return m_Height;
 	}
 	
-	public String getTitle() {
+	public String GetTitle() {
 		return m_Title;
 	}
 

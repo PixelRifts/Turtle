@@ -3,7 +3,6 @@ package com.pixelrifts.turtle;
 import com.pixelrifts.turtle.glabs.base.Application;
 import com.pixelrifts.turtle.glabs.base.Display;
 import com.pixelrifts.turtle.imgui.ImGuiLayer;
-import imgui.ImGui;
 import org.lwjgl.opengl.GL11;
 
 public class RunTurtleEngine {
@@ -12,8 +11,10 @@ public class RunTurtleEngine {
 		Application app = new Application();
 		Display.CreateWindow(app);
 		GL11.glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+
 		ImGuiLayer imGui = new ImGuiLayer();
 		imGui.Init();
+
 		app.PushLayer(imGui);
 
 		long lastTime = System.nanoTime();
@@ -53,7 +54,9 @@ public class RunTurtleEngine {
 		}
 
 		imGui.Terminate();
+
 		app.PopLayer();
+
 		Display.DestroyWindow();
 		Display.Terminate();
 	}

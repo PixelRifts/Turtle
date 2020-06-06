@@ -12,8 +12,6 @@ import imgui.enums.ImGuiKey;
 import imgui.enums.ImGuiMouseCursor;
 import imgui.gl3.ImGuiImplGl3;
 
-import java.util.Objects;
-
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_Z;
 
@@ -41,6 +39,8 @@ public class ImGuiLayer extends Layer {
 		io.setConfigFlags(ImGuiConfigFlags.NavEnableKeyboard | ImGuiConfigFlags.DockingEnable);
 		io.setBackendFlags(ImGuiBackendFlags.HasMouseCursors);
 		io.setBackendPlatformName("imgui_java_impl_glfw");
+
+		ImGui.styleColorsDark();
 
 		final int[] keyMap = new int[ImGuiKey.COUNT];
 		keyMap[ImGuiKey.Tab] = GLFW_KEY_TAB;
@@ -178,14 +178,5 @@ public class ImGuiLayer extends Layer {
 	public void Terminate() {
 		imGuiGl3.dispose();
 		ImGui.destroyContext();
-	}
-
-	private final float[] cols = new float[3];
-
-	@Override
-	public void OnImGuiRender() {
-		ImGui.begin("TESTING");
-		ImGui.colorPicker3("Color", cols);
-		ImGui.end();
 	}
 }
