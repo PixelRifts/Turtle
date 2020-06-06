@@ -11,14 +11,12 @@ import org.joml.Vector4f;
 
 public class GameLayer extends Layer {
 	private final GameScene gameScene;
-	private final Texture t;
 
 	private final float[] value = new float[1];
 
 	public GameLayer() {
 		super("Game");
 		gameScene = new GameScene();
-		t = Texture.Find("src/main/resources/smiley.png");
 	}
 
 	@Override
@@ -39,7 +37,6 @@ public class GameLayer extends Layer {
 	@Override
 	public void OnRender() {
 		gameScene.Render();
-		Renderer.Submit(t, new Rect(0, 0, 1, 1), new Vector4f(1, 1, 1, 1), Transform.ScaleHundred);
 	}
 
 	@Override

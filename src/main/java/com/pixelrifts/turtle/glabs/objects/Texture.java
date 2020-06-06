@@ -10,6 +10,8 @@ import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.stb.STBImage.*;
 
 public class Texture {
+	public static final Texture White = new Texture("src/main/resources/White.png");
+
 	private final int m_RendererID;
 	private final int m_Width;
 	private final int m_Height;

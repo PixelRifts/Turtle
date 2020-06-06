@@ -1,16 +1,18 @@
 package com.pixelrifts.turtle.engine.architecture;
 
+import com.pixelrifts.turtle.engine.utils.Transform;
 import com.pixelrifts.turtle.glabs.event.LayerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameObject {
-	private final String name;
+	public final String name;
+	public GameObject parent;
+	public final List<GameObject> children;
+	public Transform transform;
 
-	private GameObject parent;
 	private final List<Component> components;
-	private final List<GameObject> children;
 
 	public GameObject(String name) {
 		this(null, name);
@@ -21,6 +23,7 @@ public class GameObject {
 		this.name = name;
 		components = new ArrayList<>();
 		children = new ArrayList<>();
+		transform = new Transform();
 	}
 
 	public void AttachComponent(Component c) {

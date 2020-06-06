@@ -4,6 +4,7 @@ import com.pixelrifts.turtle.engine.base.GameLayer;
 import com.pixelrifts.turtle.engine.rendering.Renderer;
 import com.pixelrifts.turtle.glabs.base.Application;
 import com.pixelrifts.turtle.glabs.base.Display;
+import com.pixelrifts.turtle.glabs.objects.Texture;
 import com.pixelrifts.turtle.imgui.ImGuiLayer;
 import org.lwjgl.opengl.GL11;
 
@@ -58,6 +59,7 @@ public class RunTurtleEngine {
 			}
 		}
 
+		Texture.Clean();
 		imGui.Terminate();
 
 		app.PopLayer();
