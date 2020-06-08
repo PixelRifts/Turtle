@@ -23,6 +23,12 @@ public class SpriteRenderer extends Component {
 		mixColour = new Vector4f(1, 1, 1, 1);
 	}
 
+	public SpriteRenderer(Texture texture, Rect uvRect, Vector4f mixColour) {
+		this.texture = texture;
+		this.uvRect = uvRect;
+		this.mixColour = mixColour;
+	}
+
 	public SpriteRenderer WithTexture(Texture texture) {
 		this.texture = texture;
 		return this;
@@ -52,5 +58,14 @@ public class SpriteRenderer extends Component {
 		if (ImGui.dragFloat("y", y)) gameObject.transform.SetTranslation(0, y[0]);
 		if (ImGui.colorPicker3("colour:", colour)) mixColour.set(colour[0], colour[1], colour[2], 1.0f);
 		ImGui.end();
+	}
+
+	@Override
+	public String toString() {
+		return "SpriteRenderer(" +
+				"texture = " + texture +
+				", uvRect = " + uvRect +
+				", mixColour = " + mixColour +
+		')';
 	}
 }
