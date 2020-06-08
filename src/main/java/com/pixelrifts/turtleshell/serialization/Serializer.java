@@ -18,6 +18,21 @@ public class Serializer {
 		this.format = format;
 	}
 
+	public String SerializeToString(Object o) {
+		switch (format) {
+			case JSON:
+				return SerializeToStringJSON(o);
+			case Binary:
+				System.err.println("Binary Format is not supported yet");
+				break;
+		}
+		return "---";
+	}
+
+	private String SerializeToStringJSON(Object o) {
+		return gson.toJson(o);
+	}
+
 	public void Serialize(Object o) {
 		switch (format) {
 			case JSON:
@@ -34,6 +49,8 @@ public class Serializer {
 		try {
 			FileWriter writer = new FileWriter(new File(filepath));
 			writer.write(s);
+			writer.flush();
+			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -2,9 +2,7 @@ package com.pixelrifts.turtleshell.serialization;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 
 public class Deserializer {
 	private final String filepath;
@@ -29,9 +27,13 @@ public class Deserializer {
 	private <T> T DeserializeJSON(Class<T> type) {
 		Gson gson = Serializer.gson;
 		try {
-			FileReader reader = new FileReader(new File(filepath));
-			return gson.fromJson(reader, type);
-		} catch (FileNotFoundException e) {
+			BufferedReader reader = new BufferedReader(new FileReader(new File(filepath)));
+			String line;
+			StringBuilder txt = new StringBuilder();
+			while ((line = reader.readLine()) != null)
+				txt.append(line);
+			return gson.fromJson(txt.toString(), type);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
