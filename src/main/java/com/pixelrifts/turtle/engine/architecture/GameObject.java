@@ -8,9 +8,10 @@ import java.util.List;
 
 public class GameObject {
 	public final String name;
-	public GameObject parent;
-	public final List<GameObject> children;
 	public Transform transform;
+
+	public transient GameObject parent;
+	public final List<GameObject> children;
 
 	private final List<Component> components;
 
