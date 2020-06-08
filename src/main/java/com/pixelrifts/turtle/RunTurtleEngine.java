@@ -1,11 +1,15 @@
 package com.pixelrifts.turtle;
 
 import com.pixelrifts.turtle.engine.base.GameLayer;
+import com.pixelrifts.turtle.engine.components.SpriteRenderer;
 import com.pixelrifts.turtle.engine.rendering.Renderer;
 import com.pixelrifts.turtle.glabs.base.Application;
 import com.pixelrifts.turtle.glabs.base.Display;
 import com.pixelrifts.turtle.glabs.objects.Texture;
 import com.pixelrifts.turtle.imgui.ImGuiLayer;
+import com.pixelrifts.turtleshell.serialization.Deserializer;
+import com.pixelrifts.turtleshell.serialization.Serializer;
+import org.joml.Vector4f;
 import org.lwjgl.opengl.GL11;
 
 public class RunTurtleEngine {
@@ -20,6 +24,12 @@ public class RunTurtleEngine {
 
 		app.PushLayer(new GameLayer());
 		app.PushLayer(imGui);
+
+		Serializer s = new Serializer("src/main/resources/Serial.txt");
+		s.Serialize(new SpriteRenderer().WithMixColour(new Vector4f(100, 100, 2, 3)));
+		Deserializer d = new Deserializer("src/main/resources/Serial.txt");
+		SpriteRenderer sr = d.Deserialize(SpriteRenderer.class);
+		System.out.println(sr);
 
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
