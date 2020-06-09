@@ -1,5 +1,6 @@
 package com.pixelrifts.turtle.engine.rendering.renderables;
 
+import com.pixelrifts.turtle.engine.events.EventData;
 import com.pixelrifts.turtle.engine.events.EventNode;
 import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import com.pixelrifts.turtle.engine.utils.Keyframe;
@@ -43,7 +44,7 @@ public class Animation {
 			JSONObject parent = (JSONObject) o;
 			this.name = (String) parent.get("name");
 			this.loop = parent.get("loop") != null && (boolean) parent.get("loop");
-			this.speed = (parent.get("speed") != null ? (double) parent.get("speed") : 0) * 65;
+			this.speed = (parent.get("speed") != null ? (double) parent.get("speed") : 0) * 64;
 			JSONArray sprites = (JSONArray) parent.get("sprites");
 
 			for (JSONObject spriteDetails : (Iterable<JSONObject>) sprites) {
@@ -58,6 +59,7 @@ public class Animation {
 			e.printStackTrace();
 		}
 		current = keyframes.get(0).sprite;
+		frameActuator.AddListener("Yo", Animation::Yo);
 	}
 
 	public void Update(float dt) {
@@ -85,5 +87,9 @@ public class Animation {
 
 	public void Render(Transform transform) {
 		current.Render(transform);
+	}
+
+	private static final void Yo(EventData e) {
+		System.out.println("YO!!");
 	}
 }
