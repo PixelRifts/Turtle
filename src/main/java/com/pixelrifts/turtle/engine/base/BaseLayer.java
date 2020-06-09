@@ -10,6 +10,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class BaseLayer extends Layer {
 	private boolean shift_press = false;
+	private static final boolean debug = true;
 
 	public BaseLayer() {
 		super("Base");
@@ -55,6 +56,7 @@ public class BaseLayer extends Layer {
 
 	@Override
 	public void OnImGuiRender() {
-		SceneManager.ImGuiRender();
+		if (debug)
+			SceneManager.ImGuiRender();
 	}
 }
