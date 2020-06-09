@@ -15,7 +15,7 @@ public class GameScene extends Scene {
 
 	@Override
 	public void StartScene() {
-		Texture texture = ResourceManager.ImportTexture("src/main/resources/smiley.png");
+		Texture texture = ResourceManager.ImportTexture("smiley.png");
 		GameObject a = new GameObject("Test");
 
 		a.transform.SetScale(new Vector2f(100, 100));

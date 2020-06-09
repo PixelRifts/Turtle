@@ -14,7 +14,6 @@ public class BaseLayer extends Layer {
 	public BaseLayer() {
 		super("Base");
 		SceneManager.RegisterScene(0, new GameScene());
-		SceneManager.RegisterScene(1, new EditorScene());
 	}
 
 	@Override

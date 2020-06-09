@@ -9,7 +9,7 @@ import imgui.enums.ImGuiWindowFlags;
 import org.joml.Vector4f;
 
 public class SpriteRenderer extends Component {
-	private Texture texture;
+	private transient Texture texture;
 	private Rect uvRect;
 	private Vector4f mixColour;
 

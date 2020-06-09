@@ -4,7 +4,6 @@ import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.stb.STBImage.*;
@@ -62,11 +61,10 @@ public class Texture {
 	public int GetHeight() {
 		return m_Height;
 	}
-	public int GetBoundSlot() {
-		return m_TexSlot;
-	}
-
 	public int GetWidth() {
 		return m_Width;
+	}
+	public int GetBoundSlot() {
+		return m_TexSlot;
 	}
 }
