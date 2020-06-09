@@ -3,6 +3,7 @@ package com.pixelrifts.turtle.engine.base;
 import com.pixelrifts.turtle.engine.architecture.GameObject;
 import com.pixelrifts.turtle.engine.architecture.Scene;
 import com.pixelrifts.turtle.engine.components.SpriteRenderer;
+import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import com.pixelrifts.turtle.glabs.objects.Texture;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -14,7 +15,7 @@ public class GameScene extends Scene {
 
 	@Override
 	public void StartScene() {
-		Texture texture = Texture.Find("src/main/resources/smiley.png");
+		Texture texture = ResourceManager.ImportTexture("src/main/resources/smiley.png");
 		GameObject a = new GameObject("Test");
 
 		a.transform.SetScale(new Vector2f(100, 100));

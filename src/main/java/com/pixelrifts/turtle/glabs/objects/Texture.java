@@ -18,14 +18,11 @@ public class Texture {
 
 	private int m_TexSlot;
 
-	private static final HashMap<String, Texture> textures;
-
 	static {
-		textures = new HashMap<>();
 		stbi_set_flip_vertically_on_load(true);
 	}
 
-	private Texture(String filepath) {
+	public Texture(String filepath) {
 		IntBuffer w = BufferUtils.createIntBuffer(1);
 		IntBuffer h = BufferUtils.createIntBuffer(1);
 		IntBuffer comp = BufferUtils.createIntBuffer(1);
@@ -45,20 +42,6 @@ public class Texture {
 		assert data != null : "Image " + filepath + " doesn't exist";
 		stbi_image_free(data);
 		m_TexSlot = 0;
-	}
-
-	public static Texture Find(String filepath) {
-		if (textures.containsKey(filepath)) {
-			return textures.get(filepath);
-		} else {
-			Texture texture = new Texture(filepath);
-			textures.put(filepath, texture);
-			return texture;
-		}
-	}
-
-	public static void Clean() {
-
 	}
 
 	public void BindSlot(int textureUnit) {
