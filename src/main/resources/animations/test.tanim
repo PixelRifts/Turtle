@@ -1,0 +1,21 @@
+{
+  "name": "Test",
+  "loop": true,
+  "speed": 1.0,
+  "sprites": [
+    {
+      "image": "smiley.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 1.0,
+      "height": 1.0
+    },
+    {
+      "image": "sadey.png",
+      "x": 0.5,
+      "y": 0.5,
+      "width": 0.5,
+      "height": 0.5
+    }
+  ]
+}
