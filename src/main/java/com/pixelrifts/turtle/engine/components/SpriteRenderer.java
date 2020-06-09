@@ -44,11 +44,6 @@ public class SpriteRenderer extends Component {
 	}
 
 	@Override
-	public void ImGuiRender() {
-
-	}
-
-	@Override
 	public String toString() {
 		return "SpriteRenderer(" +
 				"texture = " + texture +

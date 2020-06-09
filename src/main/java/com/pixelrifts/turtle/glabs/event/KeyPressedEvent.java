@@ -8,7 +8,7 @@ public class KeyPressedEvent extends KeyEvent {
 		this.m_RepeatCount = repeatCount;
 	}
 
-	public int getRepeatCount() {
+	public int GetRepeatCount() {
 		return m_RepeatCount;
 	}
 	
