@@ -12,19 +12,25 @@ public class GameObject {
 
 	public transient GameObject parent;
 	public final List<GameObject> children;
-
 	private final List<Component> components;
+
+	public transient final boolean debug;
 
 	public GameObject(String name) {
 		this(null, name);
 	}
 
 	public GameObject(GameObject parent, String name) {
+		this(parent, name, true);
+	}
+
+	public GameObject(GameObject parent, String name, boolean debug) {
 		this.parent = parent;
 		this.name = name;
-		components = new ArrayList<>();
-		children = new ArrayList<>();
-		transform = new Transform();
+		this.children = new ArrayList<>();
+		this.components = new ArrayList<>();
+		this.debug = debug;
+		transform = Transform.Identity;
 	}
 
 	public void AttachComponent(Component c) {
@@ -75,9 +81,10 @@ public class GameObject {
 	}
 
 	public void ImGuiRender() {
-		for (Component component : components) {
-			component.ImGuiRender();
-		}
+		if (debug)
+			for (Component component : components) {
+				component.ImGuiRender();
+			}
 	}
 
 	public void Destroy() {

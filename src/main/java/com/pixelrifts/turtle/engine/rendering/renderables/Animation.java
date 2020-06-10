@@ -1,6 +1,5 @@
 package com.pixelrifts.turtle.engine.rendering.renderables;
 
-import com.pixelrifts.turtle.engine.events.EventData;
 import com.pixelrifts.turtle.engine.events.EventNode;
 import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import com.pixelrifts.turtle.engine.utils.Keyframe;
@@ -20,14 +19,14 @@ import java.util.List;
 @SuppressWarnings("all")
 public class Animation {
 	private final List<Keyframe> keyframes;
-	public EventNode frameActuator;
+	public transient EventNode frameActuator;
 
 	private String name;
 	private double speed;
 	private boolean loop;
 	private boolean running;
 	private Sprite current;
-	int pointer;
+	private int pointer;
 	private float timeAcc;
 
 	public Animation(String filepath) {
@@ -59,7 +58,6 @@ public class Animation {
 			e.printStackTrace();
 		}
 		current = keyframes.get(0).sprite;
-		frameActuator.AddListener("Yo", Animation::Yo);
 	}
 
 	public void Update(float dt) {
@@ -87,9 +85,5 @@ public class Animation {
 
 	public void Render(Transform transform) {
 		current.Render(transform);
-	}
-
-	private static final void Yo(EventData e) {
-		System.out.println("YO!!");
 	}
 }

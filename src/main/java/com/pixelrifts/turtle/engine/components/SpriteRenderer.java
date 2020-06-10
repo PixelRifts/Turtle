@@ -17,6 +17,7 @@ public class SpriteRenderer extends Component {
 	}
 
 	public SpriteRenderer(Sprite sprite) {
+		super("SpriteRenderer");
 		this.sprite = sprite;
 	}
 

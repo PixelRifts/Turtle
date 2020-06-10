@@ -10,7 +10,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class BaseLayer extends Layer {
 	private boolean shift_press = false;
-	private static final boolean debug = true;
+	private static boolean debug = true;
 
 	public BaseLayer() {
 		super("Base");
@@ -48,6 +48,8 @@ public class BaseLayer extends Layer {
 			}
 			if (k.GetKeyCode() == GLFW_KEY_LEFT_SHIFT)
 				shift_press = true;
+			if (k.GetKeyCode() == GLFW_KEY_D)
+				debug = !debug;
 			return true;
 		}
 		SceneManager.OnLayerEvent(e);
