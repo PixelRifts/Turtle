@@ -14,7 +14,7 @@ public class EventNode {
 
 	public void Dispatch(String tag, EventData data) {
 		for (int i = 0; i < tags.size(); i++) {
-			if (tags.get(i).equals(tag)) {
+			if (tags.get(i).equals("---") || tags.get(i).equals(tag)) {
 				listeners.get(i).OnEvent(data);
 			}
 		}
@@ -22,6 +22,11 @@ public class EventNode {
 
 	public void AddListener(String tag, EventListener listener) {
 		tags.add(tag);
+		listeners.add(listener);
+	}
+
+	public void AddListener(EventListener listener) {
+		tags.add("---");
 		listeners.add(listener);
 	}
 }
