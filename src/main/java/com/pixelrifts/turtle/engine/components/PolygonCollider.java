@@ -94,9 +94,7 @@ public class PolygonCollider extends Collider {
 				}
 			}
 		}
-		minAxis
-				.normalize()
-				.mul(minOverlap);
+		minAxis.normalize().mul(minOverlap);
 		CollisionData data = new CollisionData(true, minAxis);
 		a.collisionEvent.Dispatch("---", data);
 		return data;
