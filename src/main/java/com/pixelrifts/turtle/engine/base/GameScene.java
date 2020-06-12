@@ -42,16 +42,12 @@ public class GameScene extends Scene {
 
 	@Override
 	public void Update(float dt) {
+		super.Update(dt);
 		Collider cA = a.GetComponent(Collider.class);
 		Collider cB = b.GetComponent(Collider.class);
-		if (Collider.IsColliding(cA, cB)) {
-			CollisionData collisionData = Collider.GetCollision(cA, cB);
-			if (collisionData != null)
-				if (collisionData.colliding) {
-					b.transform.Translate(collisionData.resolution);
-					System.out.println("Collision!");
-				}
-		}
-		super.Update(dt);
+		CollisionData collisionData = Collider.GetCollision(cA, cB);
+		if (collisionData != null)
+			if (collisionData.colliding)
+				b.transform.Translate(collisionData.resolution);
 	}
 }
