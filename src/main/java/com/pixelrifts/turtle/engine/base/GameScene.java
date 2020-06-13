@@ -8,8 +8,11 @@ import com.pixelrifts.turtle.engine.components.PolygonCollider;
 import com.pixelrifts.turtle.engine.components.SpriteRenderer;
 import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import com.pixelrifts.turtle.engine.rendering.renderables.Sprite;
+import com.pixelrifts.turtle.engine.rendering.renderables.ui.UIBlock;
 import com.pixelrifts.turtle.engine.utils.CollisionData;
 import com.pixelrifts.turtle.engine.utils.Transform;
+import org.joml.Vector2f;
+import org.joml.Vector4f;
 
 public class GameScene extends Scene {
 	GameObject a;
@@ -36,6 +39,8 @@ public class GameScene extends Scene {
 		b.AttachComponent(PolygonCollider.CreateQuad(100, 100));
 		AddGameObjectToScene(b);
 
+		uiRegistry.RegisterComponent(new UIBlock(new Vector2f(100), new Vector2f(100), new Vector4f(0.8f, 0.2f, 0.3f, 1.0f)));
+
 		super.StartScene();
 	}
 
@@ -44,9 +49,11 @@ public class GameScene extends Scene {
 		super.Update(dt);
 		Collider cA = a.GetComponent(Collider.class);
 		Collider cB = b.GetComponent(Collider.class);
-		CollisionData collisionData = Collider.GetCollision(cA, cB);
-		if (collisionData != null)
-			if (collisionData.colliding)
-				b.transform.Translate(collisionData.resolution);
+		if (cA != null && cB != null) {
+			CollisionData collisionData = Collider.GetCollision(cA, cB);
+			if (collisionData != null)
+				if (collisionData.colliding)
+					b.transform.Translate(collisionData.resolution);
+		}
 	}
 }
