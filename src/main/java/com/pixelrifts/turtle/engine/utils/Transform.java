@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 public class Transform {
 	public static final Transform Identity = new Transform();
 	public static final Transform ScaleHundred = new Transform(new Vector2f(0, 0), 0, new Vector2f(100, 100));
+	public static final Transform ScaleTwoHundred = new Transform(new Vector2f(0, 0), 0, new Vector2f(200, 200));
 
 	public Vector2f position;
 	public float rotation;
@@ -85,5 +86,11 @@ public class Transform {
 
 	public Matrix4f ToMatrix() {
 		return mat;
+	}
+
+	public void Set(Transform t) {
+		SetTranslation(t.position);
+		SetRotation(t.rotation);
+		SetScale(t.scale);
 	}
 }

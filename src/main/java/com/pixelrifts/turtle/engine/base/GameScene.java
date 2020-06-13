@@ -10,7 +10,6 @@ import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import com.pixelrifts.turtle.engine.rendering.renderables.Sprite;
 import com.pixelrifts.turtle.engine.utils.CollisionData;
 import com.pixelrifts.turtle.engine.utils.Transform;
-import org.joml.Vector2f;
 
 public class GameScene extends Scene {
 	GameObject a;
@@ -30,8 +29,8 @@ public class GameScene extends Scene {
 		a.AttachComponent(PolygonCollider.CreateQuad(100, 100));
 		AddGameObjectToScene(a);
 
-		b.transform.SetScale(new Vector2f(100, 100));
-		b.transform.SetTranslation(-200, -200);
+		b.transform.SetScale(100, 100);
+		b.transform.Translate(-200, -200);
 		b.AttachComponent(new Player());
 		b.AttachComponent(new SpriteRenderer(new Sprite().WithTexture(ResourceManager.ImportTexture("smiley.png"))));
 		b.AttachComponent(PolygonCollider.CreateQuad(100, 100));
