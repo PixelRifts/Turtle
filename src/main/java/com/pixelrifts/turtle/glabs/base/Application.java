@@ -1,6 +1,7 @@
 package com.pixelrifts.turtle.glabs.base;
 
 import com.pixelrifts.turtle.glabs.event.LayerEvent;
+import com.pixelrifts.turtle.glabs.event.WindowResizedEvent;
 
 public class Application {
 	private final LayerStack m_LayerStack;
@@ -16,6 +17,11 @@ public class Application {
 	}
 
 	public void OnEvent(LayerEvent e) {
+		if (e instanceof WindowResizedEvent) {
+			WindowResizedEvent r = (WindowResizedEvent) e;
+			m_Width = r.GetWidth();
+			m_Height = r.GetHeight();
+		}
 		m_LayerStack.PropagateEvent(e);
 	}
 	

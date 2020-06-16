@@ -1,7 +1,9 @@
 package com.pixelrifts.turtle.engine.architecture;
 
+import com.pixelrifts.turtle.engine.rendering.UIRenderer;
 import com.pixelrifts.turtle.engine.utils.SceneUI;
 import com.pixelrifts.turtle.glabs.event.LayerEvent;
+import com.pixelrifts.turtle.glabs.event.WindowResizedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,8 @@ public abstract class Scene {
 	}
 
 	public void OnLayerEvent(LayerEvent e) {
+		if (e instanceof WindowResizedEvent)
+			uiRegistry.Resize();
 		for (GameObject o : objects) {
 			o.OnLayerEvent(e);
 		}

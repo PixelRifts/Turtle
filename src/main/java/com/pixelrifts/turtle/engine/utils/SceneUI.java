@@ -2,29 +2,34 @@ package com.pixelrifts.turtle.engine.utils;
 
 import com.pixelrifts.turtle.engine.rendering.UIRenderer;
 import com.pixelrifts.turtle.engine.rendering.renderables.UIComponent;
+import com.pixelrifts.turtle.glabs.base.Application;
+import org.joml.Vector2f;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class SceneUI {
-	private final List<UIComponent> uiComponents;
+	private final UIComponent master;
 
 	public SceneUI() {
-		uiComponents = new ArrayList<>();
-	}
-
-	public void Clear() {
-		uiComponents.clear();
+		master = new UIComponent(new Vector2f(0, 0), new Vector2f(Application.GetWidth(), Application.GetHeight()));
 	}
 
 	public void RegisterComponent(UIComponent ui) {
-		uiComponents.add(ui);
+		master.AddChild(ui);
 	}
 
 	public void RenderAll() {
 		UIRenderer.Begin();
-		for (UIComponent ui : uiComponents)
-			UIRenderer.Submit(ui);
+		for (UIComponent child : master.GetChildren()) Render(child);
 		UIRenderer.End();
+	}
+
+	private void Render(UIComponent component) {
+		UIRenderer.Submit(component);
+		for (UIComponent child : component.GetChildren())
+			Render(child);
+	}
+
+	public void Resize() {
+		master.WindowResize();
 	}
 }

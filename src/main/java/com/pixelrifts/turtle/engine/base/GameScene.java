@@ -11,6 +11,9 @@ import com.pixelrifts.turtle.engine.rendering.renderables.Sprite;
 import com.pixelrifts.turtle.engine.rendering.renderables.ui.UIBlock;
 import com.pixelrifts.turtle.engine.utils.CollisionData;
 import com.pixelrifts.turtle.engine.utils.Transform;
+import com.pixelrifts.turtle.engine.utils.ui.PixelConstraint;
+import com.pixelrifts.turtle.engine.utils.ui.RelativeConstraint;
+import com.pixelrifts.turtle.engine.utils.ui.UIConstraints;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -39,7 +42,14 @@ public class GameScene extends Scene {
 		b.AttachComponent(PolygonCollider.CreateQuad(100, 100));
 		AddGameObjectToScene(b);
 
-		uiRegistry.RegisterComponent(new UIBlock(new Vector2f(100), new Vector2f(100), new Vector4f(0.8f, 0.2f, 0.3f, 1.0f)));
+		UIBlock b = new UIBlock(new Vector2f(100), new Vector2f(100), new Vector4f(0.8f, 0.2f, 0.3f, 1.0f));
+		UIConstraints constraints = new UIConstraints();
+		constraints.SetXConstraint(new PixelConstraint(100));
+		constraints.SetYConstraint(new PixelConstraint(100));
+		constraints.SetWidthConstraint(new RelativeConstraint(50));
+		constraints.SetHeightConstraint(new RelativeConstraint(50));
+		b.ApplyConstraints(constraints);
+		uiRegistry.RegisterComponent(b);
 
 		super.StartScene();
 	}

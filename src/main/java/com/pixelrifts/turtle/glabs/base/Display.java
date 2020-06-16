@@ -2,8 +2,11 @@ package com.pixelrifts.turtle.glabs.base;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import com.pixelrifts.turtle.engine.rendering.Camera;
+import com.pixelrifts.turtle.engine.rendering.UIRenderer;
 import com.pixelrifts.turtle.glabs.event.*;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 
 public class Display {
 	public static long Window;
@@ -22,7 +25,12 @@ public class Display {
 		glfwMakeContextCurrent(Window);
 		GL.createCapabilities();
 
-		glfwSetWindowSizeCallback(Window, (long window, int width, int height) -> s_App.OnEvent(new WindowResizedEvent(width, height)));
+		glfwSetWindowSizeCallback(Window, (long window, int width, int height) -> {
+			GL11.glViewport(0, 0, width, height);
+			Camera.Get().WindowResized();
+			UIRenderer.Resize();
+			s_App.OnEvent(new WindowResizedEvent(width, height));
+		});
 
 		glfwSetKeyCallback(Window, (long window, int key, int scancode, int action, int mods) -> {
 			KeyEvent e = null;

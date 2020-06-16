@@ -53,6 +53,11 @@ public class UIRenderer {
 		}
 	}
 
+	public static void Resize() {
+		projection.identity();
+		projection.ortho(0, Application.GetWidth(), Application.GetHeight(), 0, -1, 1);
+	}
+
 	public static void End() {
 		Flush();
 	}
