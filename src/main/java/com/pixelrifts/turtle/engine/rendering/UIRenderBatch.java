@@ -16,13 +16,17 @@ public class UIRenderBatch {
 	private static final int UV_COUNT = 2;
 	private static final int COLOUR_COUNT = 4;
 	private static final int TEX_INDEX_COUNT = 1;
+	private static final int ROUNDING_COUNT = 1;
+	private static final int DIMENSIONS_COUNT = 2;
 
 	private static final int POS_OFFSET = 0;
 	private static final int UV_OFFSET = POS_OFFSET + POS_COUNT * Float.BYTES;
 	private static final int COLOUR_OFFSET = UV_OFFSET + UV_COUNT * Float.BYTES;
 	private static final int TEX_INDEX_OFFSET = COLOUR_OFFSET + COLOUR_COUNT * Float.BYTES;
+	private static final int ROUNDING_OFFSET = TEX_INDEX_OFFSET + TEX_INDEX_COUNT * Float.BYTES;
+	private static final int DIMENSIONS_OFFSET = ROUNDING_OFFSET + ROUNDING_COUNT * Float.BYTES;
 
-	private static final int VERTEX_COUNT = POS_COUNT + UV_COUNT + COLOUR_COUNT + TEX_INDEX_COUNT;
+	private static final int VERTEX_COUNT = POS_COUNT + UV_COUNT + COLOUR_COUNT + TEX_INDEX_COUNT + ROUNDING_COUNT + DIMENSIONS_COUNT;
 	private static final int VERTEX_SIZE = VERTEX_COUNT * Float.BYTES;
 
 	private final int vao;
@@ -56,6 +60,10 @@ public class UIRenderBatch {
 		glEnableVertexArrayAttrib(vao, 2);
 		glVertexAttribPointer(3, TEX_INDEX_COUNT, GL_FLOAT, false, VERTEX_SIZE, TEX_INDEX_OFFSET);
 		glEnableVertexArrayAttrib(vao, 3);
+		glVertexAttribPointer(4, ROUNDING_COUNT, GL_FLOAT, false, VERTEX_SIZE, ROUNDING_OFFSET);
+		glEnableVertexArrayAttrib(vao, 4);
+		glVertexAttribPointer(5, DIMENSIONS_COUNT, GL_FLOAT, false, VERTEX_SIZE, DIMENSIONS_OFFSET);
+		glEnableVertexArrayAttrib(vao, 5);
 	}
 
 	public void Begin() {
@@ -80,23 +88,23 @@ public class UIRenderBatch {
 			int index = componentCount++;
 			int offset = index * 6 * VERTEX_COUNT;
 
-			StoreData(offset, ui.GetPosition(), ui.GetSize(), ui.GetUVRect(), ui.GetColour(), texIndex);
+			StoreData(offset, ui.GetPosition(), ui.GetSize(), ui.GetUVRect(), ui.GetColour(), texIndex, ui.GetRounding());
 
 			if (textureIndex >= 16) hasRoom = false;
 			if (componentCount >= maxBatchSize) hasRoom = false;
 		}
 	}
 
-	private void StoreData(int offset, Vector2f position, Vector2f size, Rect uvRect, Vector4f colour, int texIndex) {
-		StoreVertex(offset, position.x, position.y + size.y, uvRect.x, uvRect.y, colour.x, colour.y, colour.z, colour.w, texIndex);
-		StoreVertex(offset + VERTEX_COUNT, position.x + size.x, position.y + size.y, uvRect.x + uvRect.width, uvRect.y, colour.x, colour.y, colour.z, colour.w, texIndex);
-		StoreVertex(offset + VERTEX_COUNT * 2, position.x + size.x, position.y, uvRect.x + uvRect.width, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, texIndex);
-		StoreVertex(offset + VERTEX_COUNT * 3, position.x, position.y + size.y, uvRect.x, uvRect.y, colour.x, colour.y, colour.z, colour.w, texIndex);
-		StoreVertex(offset + VERTEX_COUNT * 4, position.x + size.x, position.y, uvRect.x + uvRect.width, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, texIndex);
-		StoreVertex(offset + VERTEX_COUNT * 5, position.x, position.y, uvRect.x, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, texIndex);
+	private void StoreData(int offset, Vector2f position, Vector2f size, Rect uvRect, Vector4f colour, int texIndex, float rounding) {
+		StoreVertex(offset, position.x, position.y + size.y, uvRect.x, uvRect.y, colour.x, colour.y, colour.z, colour.w, texIndex, rounding, size.x, size.y);
+		StoreVertex(offset + VERTEX_COUNT, position.x + size.x, position.y + size.y, uvRect.x + uvRect.width, uvRect.y, colour.x, colour.y, colour.z, colour.w, texIndex, rounding, size.x, size.y);
+		StoreVertex(offset + VERTEX_COUNT * 2, position.x + size.x, position.y, uvRect.x + uvRect.width, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, texIndex, rounding, size.x, size.y);
+		StoreVertex(offset + VERTEX_COUNT * 3, position.x, position.y + size.y, uvRect.x, uvRect.y, colour.x, colour.y, colour.z, colour.w, texIndex, rounding, size.x, size.y);
+		StoreVertex(offset + VERTEX_COUNT * 4, position.x + size.x, position.y, uvRect.x + uvRect.width, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, texIndex, rounding, size.x, size.y);
+		StoreVertex(offset + VERTEX_COUNT * 5, position.x, position.y, uvRect.x, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, texIndex, rounding, size.x, size.y);
 	}
 
-	private void StoreVertex(int offset, float x, float y, float u, float v, float r, float g, float b, float a, float t) {
+	private void StoreVertex(int offset, float x, float y, float u, float v, float r, float g, float b, float a, float t, float rn, float sx, float sy) {
 		data[offset] = x;
 		data[offset + 1] = y;
 		data[offset + 2] = u;
@@ -106,6 +114,9 @@ public class UIRenderBatch {
 		data[offset + 6] = b;
 		data[offset + 7] = a;
 		data[offset + 8] = t;
+		data[offset + 9] = rn;
+		data[offset + 10] = sx;
+		data[offset + 11] = sy;
 	}
 
 	public void UpdateBuffer() {

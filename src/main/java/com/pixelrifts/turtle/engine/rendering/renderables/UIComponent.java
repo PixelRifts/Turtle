@@ -21,13 +21,15 @@ public class UIComponent {
 	protected Rect uv;
 	protected Texture texture;
 	protected UIConstraints constraints;
+	protected float rounding;
 
-	protected UIComponent(Vector2f position, Vector2f size, Vector4f colour, Rect uv, Texture texture) {
+	protected UIComponent(Vector2f position, Vector2f size, Vector4f colour, Rect uv, Texture texture, float rounding) {
 		this.position = position;
 		this.size = size;
 		this.colour = colour;
 		this.uv = uv;
 		this.texture = texture;
+		this.rounding = rounding;
 		children = new ArrayList<>();
 	}
 
@@ -67,6 +69,9 @@ public class UIComponent {
 	}
 	public Texture GetTexture() {
 		return texture;
+	}
+	public float GetRounding() {
+		return rounding;
 	}
 	public void WindowResize() {
 		if (constraints != null) constraints.Resize();

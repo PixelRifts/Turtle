@@ -13,6 +13,6 @@ public class UITexture extends UIComponent {
 	}
 
 	public UITexture(Vector2f position, Vector2f size, Rect uv, Texture texture) {
-		super(position, size, new Vector4f(1, 1, 1, 1), uv, texture);
+		super(position, size, new Vector4f(1, 1, 1, 1), uv, texture, 0);
 	}
 }

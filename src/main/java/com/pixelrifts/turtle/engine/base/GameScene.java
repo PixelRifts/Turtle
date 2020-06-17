@@ -42,12 +42,12 @@ public class GameScene extends Scene {
 		b.AttachComponent(PolygonCollider.CreateQuad(100, 100));
 		AddGameObjectToScene(b);
 
-		UIBlock b = new UIBlock(new Vector2f(100), new Vector2f(100), new Vector4f(0.8f, 0.2f, 0.3f, 1.0f));
+		UIBlock b = new UIBlock(new Vector4f(0.8f, 0.2f, 0.3f, 1.0f));
 		UIConstraints constraints = new UIConstraints();
-		constraints.SetXConstraint(new PixelConstraint(100));
-		constraints.SetYConstraint(new PixelConstraint(100));
-		constraints.SetWidthConstraint(new RelativeConstraint(50));
-		constraints.SetHeightConstraint(new RelativeConstraint(50));
+		constraints.SetXConstraint(new PixelConstraint(0));
+		constraints.SetYConstraint(new PixelConstraint(0));
+		constraints.SetWidthConstraint(new RelativeConstraint(30));
+		constraints.SetHeightConstraint(new RelativeConstraint(100));
 		b.ApplyConstraints(constraints);
 		uiRegistry.RegisterComponent(b);
 
