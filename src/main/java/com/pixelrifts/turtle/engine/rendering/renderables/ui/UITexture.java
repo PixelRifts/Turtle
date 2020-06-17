@@ -12,7 +12,15 @@ public class UITexture extends UIComponent {
 		this(position, size, new Rect(0, 0, 1, 1), texture);
 	}
 
+	public UITexture(Vector2f position, Vector2f size, Texture texture, float rounding) {
+		this(position, size, new Rect(0, 0, 1, 1), texture, rounding);
+	}
+
 	public UITexture(Vector2f position, Vector2f size, Rect uv, Texture texture) {
-		super(position, size, new Vector4f(1, 1, 1, 1), uv, texture, 0);
+		this(position, size, uv, texture, 0);
+	}
+
+	public UITexture(Vector2f position, Vector2f size, Rect uv, Texture texture, float rounding) {
+		super(position, size, new Vector4f(1, 1, 1, 1), uv, texture, rounding);
 	}
 }

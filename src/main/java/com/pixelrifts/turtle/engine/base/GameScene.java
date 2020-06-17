@@ -27,6 +27,15 @@ public class GameScene extends Scene {
 
 	@Override
 	public void StartScene() {
+		UIBlock blk = new UIBlock(new Vector4f(0.8f, 0.2f, 0.3f, 1.0f), 10);
+		UIConstraints constraints = new UIConstraints();
+		constraints.SetXConstraint(new PixelConstraint(0));
+		constraints.SetYConstraint(new PixelConstraint(0));
+		constraints.SetWidthConstraint(new RelativeConstraint(30));
+		constraints.SetHeightConstraint(new RelativeConstraint(100));
+		blk.ApplyConstraints(constraints);
+		uiRegistry.RegisterComponent(blk);
+
 		a = new GameObject("Test");
 		b = new GameObject("Test2");
 
@@ -41,15 +50,6 @@ public class GameScene extends Scene {
 		b.AttachComponent(new SpriteRenderer(new Sprite().WithTexture(ResourceManager.ImportTexture("smiley.png"))));
 		b.AttachComponent(PolygonCollider.CreateQuad(100, 100));
 		AddGameObjectToScene(b);
-
-		UIBlock b = new UIBlock(new Vector4f(0.8f, 0.2f, 0.3f, 1.0f));
-		UIConstraints constraints = new UIConstraints();
-		constraints.SetXConstraint(new PixelConstraint(0));
-		constraints.SetYConstraint(new PixelConstraint(0));
-		constraints.SetWidthConstraint(new RelativeConstraint(30));
-		constraints.SetHeightConstraint(new RelativeConstraint(100));
-		b.ApplyConstraints(constraints);
-		uiRegistry.RegisterComponent(b);
 
 		super.StartScene();
 	}

@@ -9,6 +9,10 @@ import org.joml.Vector4f;
 
 public class UIBlock extends UIComponent {
 	public UIBlock(Vector4f colour) {
-		super(new Vector2f(), new Vector2f(), colour, new Rect(0, 0, 1, 1), Texture.White, 50);
+		super(new Vector2f(), new Vector2f(), colour, new Rect(0, 0, 1, 1), Texture.White, 0);
+	}
+
+	public UIBlock(Vector4f colour, float rounding) {
+		super(new Vector2f(), new Vector2f(), colour, new Rect(0, 0, 1, 1), Texture.White, rounding);
 	}
 }
