@@ -29,7 +29,6 @@ public class UIRenderer {
 		batches.add(new UIRenderBatch(BATCH_SIZE));
 
 		shader.Bind();
-		shader.UploadMatrix("u_Projection", projection);
 		shader.UploadIntArray("u_TextureSlots", textureSlots);
 		shader.Unbind();
 	}
@@ -64,6 +63,7 @@ public class UIRenderer {
 
 	public static void Flush() {
 		shader.Bind();
+		shader.UploadMatrix("u_Projection", projection);
 		for (UIRenderBatch batch : batches) {
 			batch.Bind();
 			batch.UpdateBuffer();

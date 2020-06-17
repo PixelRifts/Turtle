@@ -11,9 +11,7 @@ import com.pixelrifts.turtle.engine.rendering.renderables.Sprite;
 import com.pixelrifts.turtle.engine.rendering.renderables.ui.UIBlock;
 import com.pixelrifts.turtle.engine.utils.CollisionData;
 import com.pixelrifts.turtle.engine.utils.Transform;
-import com.pixelrifts.turtle.engine.utils.ui.PixelConstraint;
-import com.pixelrifts.turtle.engine.utils.ui.RelativeConstraint;
-import com.pixelrifts.turtle.engine.utils.ui.UIConstraints;
+import com.pixelrifts.turtle.engine.utils.ui.*;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -27,12 +25,13 @@ public class GameScene extends Scene {
 
 	@Override
 	public void StartScene() {
-		UIBlock blk = new UIBlock(new Vector4f(0.8f, 0.2f, 0.3f, 1.0f), 10);
+		UIBlock blk = new UIBlock(new Vector4f(0.8f, 0.2f, 0.3f, 1.0f), 15);
+
 		UIConstraints constraints = new UIConstraints();
-		constraints.SetXConstraint(new PixelConstraint(0));
-		constraints.SetYConstraint(new PixelConstraint(0));
+		constraints.SetXConstraint(new CenterConstraint());
+		constraints.SetYConstraint(new CenterConstraint());
 		constraints.SetWidthConstraint(new RelativeConstraint(30));
-		constraints.SetHeightConstraint(new RelativeConstraint(100));
+		constraints.SetHeightConstraint(new AspectConstraint(1));
 		blk.ApplyConstraints(constraints);
 		uiRegistry.RegisterComponent(blk);
 
