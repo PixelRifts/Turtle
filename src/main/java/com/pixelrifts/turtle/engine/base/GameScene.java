@@ -8,8 +8,11 @@ import com.pixelrifts.turtle.engine.components.PolygonCollider;
 import com.pixelrifts.turtle.engine.components.SpriteRenderer;
 import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import com.pixelrifts.turtle.engine.rendering.renderables.Sprite;
+import com.pixelrifts.turtle.engine.rendering.renderables.ui.UIBlock;
 import com.pixelrifts.turtle.engine.utils.CollisionData;
 import com.pixelrifts.turtle.engine.utils.Transform;
+import com.pixelrifts.turtle.engine.utils.ui.*;
+import org.joml.Vector4f;
 
 public class GameScene extends Scene {
 	GameObject a;
@@ -21,6 +24,16 @@ public class GameScene extends Scene {
 
 	@Override
 	public void StartScene() {
+		UIBlock blk = new UIBlock(new Vector4f(0.8f, 0.2f, 0.3f, 1.0f), 15);
+
+		UIConstraints constraints = new UIConstraints();
+		constraints.SetXConstraint(new CenterConstraint());
+		constraints.SetYConstraint(new PixelConstraint(20));
+		constraints.SetWidthConstraint(new RelativeConstraint(30));
+		constraints.SetHeightConstraint(new AspectConstraint(1));
+		blk.ApplyConstraints(constraints);
+		uiRegistry.RegisterComponent(blk);
+
 		a = new GameObject("Test");
 		b = new GameObject("Test2");
 
@@ -44,9 +57,11 @@ public class GameScene extends Scene {
 		super.Update(dt);
 		Collider cA = a.GetComponent(Collider.class);
 		Collider cB = b.GetComponent(Collider.class);
-		CollisionData collisionData = Collider.GetCollision(cA, cB);
-		if (collisionData != null)
-			if (collisionData.colliding)
-				b.transform.Translate(collisionData.resolution);
+		if (cA != null && cB != null) {
+			CollisionData collisionData = Collider.GetCollision(cA, cB);
+			if (collisionData != null)
+				if (collisionData.colliding)
+					b.transform.Translate(collisionData.resolution);
+		}
 	}
 }

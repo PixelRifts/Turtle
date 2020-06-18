@@ -3,6 +3,7 @@ package com.pixelrifts.turtle;
 import com.pixelrifts.turtle.engine.base.BaseLayer;
 import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import com.pixelrifts.turtle.engine.rendering.Renderer;
+import com.pixelrifts.turtle.engine.rendering.UIRenderer;
 import com.pixelrifts.turtle.glabs.base.Application;
 import com.pixelrifts.turtle.glabs.base.Display;
 import com.pixelrifts.turtle.imgui.ImGuiLayer;
@@ -59,6 +60,8 @@ public class RunTurtleEngine {
 			}
 		}
 
+		Renderer.Clean();
+		UIRenderer.Clean();
 		ResourceManager.Clean();
 		imGui.Terminate();
 
