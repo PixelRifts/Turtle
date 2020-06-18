@@ -2,9 +2,7 @@ package com.pixelrifts.turtle.engine.rendering.renderables;
 
 import com.pixelrifts.turtle.engine.utils.Rect;
 import com.pixelrifts.turtle.engine.utils.ui.UIConstraints;
-import com.pixelrifts.turtle.glabs.event.WindowResizedEvent;
 import com.pixelrifts.turtle.glabs.objects.Texture;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UIComponent {
-	private UIComponent parent;
+	public UIComponent parent;
 	private final List<UIComponent> children;
 
 	public Vector2f position;
@@ -23,9 +21,9 @@ public class UIComponent {
 	protected UIConstraints constraints;
 	protected float rounding;
 
-	protected UIComponent(Vector2f position, Vector2f size, Vector4f colour, Rect uv, Texture texture, float rounding) {
-		this.position = position;
-		this.size = size;
+	protected UIComponent(Vector4f colour, Rect uv, Texture texture, float rounding) {
+		this.position = new Vector2f();
+		this.size = new Vector2f();
 		this.colour = colour;
 		this.uv = uv;
 		this.texture = texture;

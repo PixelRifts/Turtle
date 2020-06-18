@@ -12,7 +12,7 @@ public class PolygonCollider extends Collider {
 
 	private final Vector2f[] transformedVertices;
 
-	private PolygonCollider(Vector2f[] localVertices) {
+	public PolygonCollider(Vector2f[] localVertices) {
 		super("PolygonCollider", ColliderType.POLYGON);
 		this.localVertices = localVertices;
 		this.transformedVertices = new Vector2f[localVertices.length];

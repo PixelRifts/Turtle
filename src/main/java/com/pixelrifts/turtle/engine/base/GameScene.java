@@ -12,7 +12,6 @@ import com.pixelrifts.turtle.engine.rendering.renderables.ui.UIBlock;
 import com.pixelrifts.turtle.engine.utils.CollisionData;
 import com.pixelrifts.turtle.engine.utils.Transform;
 import com.pixelrifts.turtle.engine.utils.ui.*;
-import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 public class GameScene extends Scene {
@@ -29,7 +28,7 @@ public class GameScene extends Scene {
 
 		UIConstraints constraints = new UIConstraints();
 		constraints.SetXConstraint(new CenterConstraint());
-		constraints.SetYConstraint(new CenterConstraint());
+		constraints.SetYConstraint(new PixelConstraint(20));
 		constraints.SetWidthConstraint(new RelativeConstraint(30));
 		constraints.SetHeightConstraint(new AspectConstraint(1));
 		blk.ApplyConstraints(constraints);
