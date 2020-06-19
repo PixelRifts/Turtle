@@ -18,15 +18,15 @@ public class UIRenderer {
 	private static final Shader shader;
 
 	private static final Matrix4f projection;
-	private static final List<UIRenderBatch> batches;
+	private static final List<UIRenderBatch> uiBatches;
 
 	static {
 		shader = new Shader("Ui");
 		projection = new Matrix4f().identity();
 		projection.ortho(0, Application.GetWidth(), Application.GetHeight(), 0, -1, 1);
 
-		batches = new ArrayList<>();
-		batches.add(new UIRenderBatch(BATCH_SIZE));
+		uiBatches = new ArrayList<>();
+		uiBatches.add(new UIRenderBatch(BATCH_SIZE));
 
 		shader.Bind();
 		shader.UploadIntArray("u_TextureSlots", textureSlots);
@@ -34,21 +34,21 @@ public class UIRenderer {
 	}
 
 	public static void Begin() {
-		for (UIRenderBatch b : batches) b.Delete();
-		batches.clear();
-		batches.add(new UIRenderBatch(BATCH_SIZE));
-		batches.get(batches.size() - 1).Begin();
+		for (UIRenderBatch b : uiBatches) b.Delete();
+		uiBatches.clear();
+		uiBatches.add(new UIRenderBatch(BATCH_SIZE));
+		uiBatches.get(uiBatches.size() - 1).Begin();
 	}
 
 	public static void Submit(UIComponent ui) {
-		if (batches.get(batches.size() - 1).hasRoom) {
-			UIRenderBatch batch = batches.get(batches.size() - 1);
+		if (uiBatches.get(uiBatches.size() - 1).hasRoom) {
+			UIRenderBatch batch = uiBatches.get(uiBatches.size() - 1);
 			batch.AddToBatch(ui);
 		} else {
 			UIRenderBatch batch = new UIRenderBatch(BATCH_SIZE);
 			batch.Begin();
 			batch.AddToBatch(ui);
-			batches.add(batch);
+			uiBatches.add(batch);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class UIRenderer {
 	public static void Flush() {
 		shader.Bind();
 		shader.UploadMatrix("u_Projection", projection);
-		for (UIRenderBatch batch : batches) {
+		for (UIRenderBatch batch : uiBatches) {
 			batch.Bind();
 			batch.UpdateBuffer();
 			glDrawArrays(GL_TRIANGLES, 0, batch.GetVertexCount());
@@ -75,6 +75,6 @@ public class UIRenderer {
 
 	public static void Clean() {
 		shader.Delete();
-		for (UIRenderBatch b : batches) b.Delete();
+		for (UIRenderBatch b : uiBatches) b.Delete();
 	}
 }

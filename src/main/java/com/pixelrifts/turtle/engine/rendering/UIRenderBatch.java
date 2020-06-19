@@ -30,7 +30,7 @@ public class UIRenderBatch {
 	private static final int VERTEX_SIZE = VERTEX_COUNT * Float.BYTES;
 
 	private final int vao;
-	private final int dynamicDataVbo;
+	private final int vbo;
 
 	private float[] data;
 	private final List<Texture> textures;
@@ -48,8 +48,8 @@ public class UIRenderBatch {
 		glBindVertexArray(vao);
 
 		hasRoom = true;
-		dynamicDataVbo = glCreateBuffers();
-		glBindBuffer(GL_ARRAY_BUFFER, dynamicDataVbo);
+		vbo = glCreateBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBufferData(GL_ARRAY_BUFFER, maxBatchSize * 6 * VERTEX_SIZE, GL_DYNAMIC_DRAW);
 
 		glVertexAttribPointer(0, POS_COUNT, GL_FLOAT, false, VERTEX_SIZE, POS_OFFSET);
@@ -120,7 +120,7 @@ public class UIRenderBatch {
 	}
 
 	public void UpdateBuffer() {
-		glBindBuffer(GL_ARRAY_BUFFER, dynamicDataVbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, data);
 	}
 
@@ -137,7 +137,7 @@ public class UIRenderBatch {
 	}
 
 	public void Delete() {
-		glDeleteBuffers(dynamicDataVbo);
+		glDeleteBuffers(vbo);
 		glDeleteVertexArrays(vao);
 	}
 
