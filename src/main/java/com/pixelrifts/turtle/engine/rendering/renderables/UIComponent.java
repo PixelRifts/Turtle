@@ -48,6 +48,12 @@ public class UIComponent {
 		child.WindowResize();
 	}
 
+	public void Update() {
+		for (UIComponent child : children) {
+			child.Update();
+		}
+	}
+
 	public List<UIComponent> GetChildren() {
 		return children;
 	}

@@ -38,6 +38,7 @@ public abstract class Scene {
 		for (GameObject o : objects) {
 			o.Update(dt);
 		}
+		uiRegistry.Update();
 	}
 
 	public void Render() {
