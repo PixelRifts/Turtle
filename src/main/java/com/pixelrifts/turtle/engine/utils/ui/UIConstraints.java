@@ -87,7 +87,7 @@ public class UIConstraints {
 		switch (yConstraint.type) {
 			case Min: y = ((MinConstraint)yConstraint).pixels; break;
 			case Max: y = baseY + baseHeight - ((MaxConstraint)yConstraint).pixels - height; break;
-			case Pixel: assert false : "PixelConstraint not supported for y. Use MinConstraint or MaxConstraint for left/right alignment respectively";
+			case Pixel: assert false : "PixelConstraint not supported for y. Use MinConstraint or MaxConstraint for up/down alignment respectively";
 			case Center: y = baseHeight / 2f - height / 2f; break;
 			case Relative: y = ((RelativeConstraint)yConstraint).percentage / 100f * baseHeight; break;
 			case Aspect:
