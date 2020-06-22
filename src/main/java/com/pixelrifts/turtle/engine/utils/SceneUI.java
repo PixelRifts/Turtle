@@ -33,4 +33,8 @@ public class SceneUI {
 		master.size.set(Application.GetWidth(), Application.GetHeight());
 		master.WindowResize();
 	}
+
+	public void Update() {
+		master.Update();
+	}
 }

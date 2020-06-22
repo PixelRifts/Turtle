@@ -13,6 +13,9 @@ import com.pixelrifts.turtle.engine.utils.CollisionData;
 import com.pixelrifts.turtle.engine.utils.Transform;
 import com.pixelrifts.turtle.engine.utils.ui.*;
 import org.joml.Vector4f;
+import org.lwjgl.stb.STBEasyFont;
+import org.lwjgl.stb.STBTTFontinfo;
+import org.lwjgl.system.MemoryStack;
 
 public class GameScene extends Scene {
 	GameObject a;
@@ -24,11 +27,11 @@ public class GameScene extends Scene {
 
 	@Override
 	public void StartScene() {
-		UIBlock blk = new UIBlock(new Vector4f(0.8f, 0.2f, 0.3f, 1.0f), 15);
+		UIBlock blk = new UIBlock(new Vector4f(0.8f, 0.2f, 0.3f, 1.0f), 25);
 
 		UIConstraints constraints = new UIConstraints();
-		constraints.SetXConstraint(new CenterConstraint());
-		constraints.SetYConstraint(new PixelConstraint(20));
+		constraints.SetXConstraint(new MaxConstraint(10));
+		constraints.SetYConstraint(new CenterConstraint());
 		constraints.SetWidthConstraint(new RelativeConstraint(30));
 		constraints.SetHeightConstraint(new AspectConstraint(1));
 		blk.ApplyConstraints(constraints);

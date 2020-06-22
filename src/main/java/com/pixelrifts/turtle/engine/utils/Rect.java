@@ -20,6 +20,20 @@ public class Rect {
 		this.height = (float) height;
 	}
 
+	public void Set(float x, float y, float width, float height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
+
+	public void Set(double x, double y, double width, double height) {
+		this.x = (float) x;
+		this.y = (float) y;
+		this.width = (float) width;
+		this.height = (float) height;
+	}
+
 	public Rect Scale(float sx, float sy) {
 		width *= sx;
 		height *= sy;

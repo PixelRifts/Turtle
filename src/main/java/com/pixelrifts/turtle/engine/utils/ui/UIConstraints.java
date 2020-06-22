@@ -8,6 +8,8 @@ public class UIConstraints {
 	public float width;
 	public float height;
 
+	private float baseX;
+	private float baseY;
 	private float baseWidth;
 	private float baseHeight;
 
@@ -21,6 +23,8 @@ public class UIConstraints {
 	private boolean heightCalculated;
 
 	public void SetParent(UIComponent parent) {
+		baseX = parent.position.x;
+		baseY = parent.position.y;
 		baseWidth = parent.size.x;
 		baseHeight = parent.size.y;
 		this.parent = parent;
@@ -43,6 +47,8 @@ public class UIConstraints {
 		yCalculated = false;
 		heightCalculated = false;
 
+		baseX = parent.parent.position.x;
+		baseY = parent.parent.position.y;
 		baseWidth = parent.parent.size.x;
 		baseHeight = parent.parent.size.y;
 
@@ -66,7 +72,9 @@ public class UIConstraints {
 
 	private void CalculateX() {
 		switch (xConstraint.type) {
-			case Pixel: x = ((PixelConstraint)xConstraint).pixels; break;
+			case Min: x = ((MinConstraint)xConstraint).pixels; break;
+			case Max: x = baseX + baseWidth - ((MaxConstraint)xConstraint).pixels - width; break;
+			case Pixel: assert false : "PixelConstraint not supported for x. Use MinConstraint or MaxConstraint for left/right alignment respectively";
 			case Center: x = baseWidth / 2f - width / 2f; break;
 			case Relative: x = ((RelativeConstraint)xConstraint).percentage / 100f * baseWidth; break;
 			case Aspect:
@@ -77,7 +85,9 @@ public class UIConstraints {
 
 	private void CalculateY() {
 		switch (yConstraint.type) {
-			case Pixel: y = ((PixelConstraint)yConstraint).pixels; break;
+			case Min: y = ((MinConstraint)yConstraint).pixels; break;
+			case Max: y = baseY + baseHeight - ((MaxConstraint)yConstraint).pixels - height; break;
+			case Pixel: assert false : "PixelConstraint not supported for y. Use MinConstraint or MaxConstraint for up/down alignment respectively";
 			case Center: y = baseHeight / 2f - height / 2f; break;
 			case Relative: y = ((RelativeConstraint)yConstraint).percentage / 100f * baseHeight; break;
 			case Aspect:
@@ -89,8 +99,11 @@ public class UIConstraints {
 
 	private void CalculateWidth() {
 		switch (widthConstraint.type) {
-			case Pixel: width = ((PixelConstraint)widthConstraint).pixels; break;
+			case Min: assert false : "Min not supported for width constraint";
+			case Max: assert false : "Max not supported for width constraint";
 			case Center: assert false : "CenterConstraint not allowed for width or height";
+
+			case Pixel: width = ((PixelConstraint)widthConstraint).pixels; break;
 			case Relative: width = ((RelativeConstraint)widthConstraint).percentage / 100f * baseWidth; break;
 			case Aspect:
 				assert heightConstraint.type != ConstraintType.Aspect : "Width and Height both cannot be Aspect Constrained";
@@ -100,8 +113,11 @@ public class UIConstraints {
 
 	private void CalculateHeight() {
 		switch (heightConstraint.type) {
-			case Pixel: height = ((PixelConstraint)heightConstraint).pixels; break;
+			case Min: assert false : "Min not supported for height constraint";
+			case Max: assert false : "Max not supported for height constraint";
 			case Center: assert false : "CenterConstraint not allowed for width or height";
+
+			case Pixel: height = ((PixelConstraint)heightConstraint).pixels; break;
 			case Relative: height = ((RelativeConstraint)heightConstraint).percentage / 100f * baseHeight; break;
 			case Aspect:
 				assert widthConstraint.type != ConstraintType.Aspect : "Width and Height both cannot be Aspect Constrained";

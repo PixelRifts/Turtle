@@ -1,7 +1,7 @@
 package com.pixelrifts.turtle.engine.utils.ui;
 
 enum ConstraintType {
-	Pixel, Center, Relative, Aspect
+	Min, Max, Center, Relative, Aspect, Pixel
 }
 public abstract class UIConstraint {
 	protected ConstraintType type;

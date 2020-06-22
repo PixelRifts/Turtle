@@ -4,7 +4,7 @@ public class PixelConstraint extends UIConstraint {
 	public final float pixels;
 
 	public PixelConstraint(float pixels) {
-		super(ConstraintType.Pixel);
+		super(ConstraintType.Min);
 		this.pixels = pixels;
 	}
 }
