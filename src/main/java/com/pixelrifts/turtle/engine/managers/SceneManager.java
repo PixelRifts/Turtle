@@ -33,6 +33,10 @@ public class SceneManager {
 		currentScene.Render();
 	}
 
+	public static void RenderUI() {
+		currentScene.RenderUI();
+	}
+
 	public static void ImGuiRender() {
 		currentScene.ImGuiRender();
 	}

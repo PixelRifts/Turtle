@@ -46,4 +46,10 @@ public class LayerStack {
 			layer.OnRender();
 		}
 	}
+
+	public void PropagateRenderUI() {
+		for (Layer layer : m_Layers) {
+			layer.OnRenderUI();
+		}
+	}
 }

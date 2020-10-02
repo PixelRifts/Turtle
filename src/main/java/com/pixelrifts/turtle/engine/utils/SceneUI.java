@@ -18,9 +18,8 @@ public class SceneUI {
 	}
 
 	public void RenderAll() {
-		UIRenderer.Begin();
-		for (UIComponent child : master.GetChildren()) Render(child);
-		UIRenderer.End();
+		for (UIComponent child : master.GetChildren())
+			Render(child);
 	}
 
 	private void Render(UIComponent component) {

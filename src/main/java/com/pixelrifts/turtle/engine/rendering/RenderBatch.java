@@ -3,6 +3,7 @@ package com.pixelrifts.turtle.engine.rendering;
 import com.pixelrifts.turtle.engine.utils.Rect;
 import com.pixelrifts.turtle.engine.utils.Transform;
 import com.pixelrifts.turtle.glabs.objects.Texture;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import java.util.ArrayList;
@@ -102,6 +103,51 @@ public class RenderBatch {
 			if (textureIndex >= 16) hasRoom = false;
 			if (spriteCount >= maxBatchSize) hasRoom = false;
 		}
+	}
+
+	@SuppressWarnings("all")
+	public void AddToBatch(Vector2f start, Vector2f end, float thickness, Vector4f colour) {
+		if (hasRoom) {
+			int texIndex;
+
+			if (textures.contains(Texture.White)) {
+				texIndex = textures.indexOf(Texture.White);
+			} else {
+				textures.add(Texture.White);
+				texIndex = textureIndex++;
+				if (Texture.White.GetBoundSlot() != -1) texIndex = Texture.White.GetBoundSlot();
+			}
+
+			int index = spriteCount++;
+			int offset = index * 6 * VERTEX_COUNT;
+
+			Vector2f line = start.sub(end, new Vector2f());
+			Vector2f left = new Vector2f(-line.y, line.x).normalize().mul(thickness / 2);
+			Vector2f right = new Vector2f(line.y, -line.x).normalize().mul(thickness / 2);
+
+			Vector2f[] vertices = new Vector2f[] {
+					end.add(left, new Vector2f()),
+					end.add(right, new Vector2f()),
+					start.add(right, new Vector2f()),
+					end.add(left, new Vector2f()),
+					start.add(right, new Vector2f()),
+					start.add(left, new Vector2f()),
+			};
+
+			StoreData(offset, vertices, texIndex, new Rect(), colour);
+
+			if (textureIndex >= 16) hasRoom = false;
+			if (spriteCount >= maxBatchSize) hasRoom = false;
+		}
+	}
+
+	private void StoreData(int offset, Vector2f[] vertexPositions, int textureIndex, Rect uvRect, Vector4f colour) {
+		StoreVertex(offset, vertexPositions[0].x, vertexPositions[0].y, uvRect.x, uvRect.y, colour.x, colour.y, colour.z, colour.w, textureIndex);
+		StoreVertex(offset + VERTEX_COUNT, vertexPositions[1].x, vertexPositions[1].y, uvRect.x + uvRect.width, uvRect.y, colour.x, colour.y, colour.z, colour.w, textureIndex);
+		StoreVertex(offset + VERTEX_COUNT * 2, vertexPositions[2].x, vertexPositions[2].y, uvRect.x + uvRect.width, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, textureIndex);
+		StoreVertex(offset + VERTEX_COUNT * 3, vertexPositions[3].x, vertexPositions[3].y, uvRect.x, uvRect.y, colour.x, colour.y, colour.z, colour.w, textureIndex);
+		StoreVertex(offset + VERTEX_COUNT * 4, vertexPositions[4].x, vertexPositions[4].y, uvRect.x + uvRect.width, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, textureIndex);
+		StoreVertex(offset + VERTEX_COUNT * 5, vertexPositions[5].x, vertexPositions[5].y, uvRect.x, uvRect.y + uvRect.height, colour.x, colour.y, colour.z, colour.w, textureIndex);
 	}
 
 	private void StoreData(int offset, Vector4f[] vertexPositions, int textureIndex, Rect uvRect, Vector4f colour) {

@@ -4,6 +4,7 @@ import com.pixelrifts.turtle.engine.utils.Rect;
 import com.pixelrifts.turtle.engine.utils.Transform;
 import com.pixelrifts.turtle.glabs.objects.Shader;
 import com.pixelrifts.turtle.glabs.objects.Texture;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class Renderer {
 		batches.get(batches.size() - 1).Begin();
 	}
 
-	public static void Submit(Texture texture, Rect uvRect, Vector4f colour, Transform t) {
+	public static void DrawTexture(Texture texture, Rect uvRect, Vector4f colour, Transform t) {
 		if (batches.get(batches.size() - 1).hasRoom) {
 			RenderBatch batch = batches.get(batches.size() - 1);
 			batch.AddToBatch(texture, uvRect, colour, t);
@@ -47,6 +48,18 @@ public class Renderer {
 			RenderBatch batch = new RenderBatch(BATCH_SIZE);
 			batch.Begin();
 			batch.AddToBatch(texture, uvRect, colour, t);
+			batches.add(batch);
+		}
+	}
+
+	public static void DrawLine(Vector2f start, Vector2f end, float thickness, Vector4f colour) {
+		if (batches.get(batches.size() - 1).hasRoom) {
+			RenderBatch batch = batches.get(batches.size() - 1);
+			batch.AddToBatch(start, end, thickness, colour);
+		} else {
+			RenderBatch batch = new RenderBatch(BATCH_SIZE);
+			batch.Begin();
+			batch.AddToBatch(start, end, thickness, colour);
 			batches.add(batch);
 		}
 	}

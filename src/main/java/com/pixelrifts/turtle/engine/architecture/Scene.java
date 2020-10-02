@@ -23,6 +23,7 @@ public abstract class Scene {
 
 	public void AddGameObjectToScene(GameObject o) {
 		objects.add(o);
+		o.added = true;
 		if (running) o.Init();
 	}
 
@@ -45,6 +46,9 @@ public abstract class Scene {
 		for (GameObject o : objects) {
 			o.Render();
 		}
+	}
+
+	public void RenderUI() {
 		uiRegistry.RenderAll();
 	}
 

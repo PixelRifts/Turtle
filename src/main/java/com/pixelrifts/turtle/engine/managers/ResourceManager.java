@@ -25,6 +25,16 @@ public class ResourceManager {
 		}
 	}
 
+	public static Texture ImportTexture(String filename, boolean shouldFlip) {
+		if (textures.containsKey(filename)) {
+			return textures.get(filename);
+		} else {
+			Texture texture = new Texture("src/main/resources/" + filename, shouldFlip);
+			textures.put(filename, texture);
+			return texture;
+		}
+	}
+
 	public static Animation ImportAnimation(String filename) {
 		if (animations.containsKey(filename)) {
 			return animations.get(filename);

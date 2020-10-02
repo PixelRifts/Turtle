@@ -4,6 +4,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
+@SuppressWarnings("all")
 public class Transform {
 	public static final Transform Identity = new Transform();
 	public static final Transform ScaleHundred = new Transform(new Vector2f(0, 0), 0, new Vector2f(100, 100));
@@ -27,54 +28,64 @@ public class Transform {
 		RecalculateMatrix();
 	}
 
-	public void SetTranslation(Vector2f d) {
+	public Transform SetTranslation(Vector2f d) {
 		position.set(d);
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void SetRotation(float r) {
+	public Transform SetRotation(float r) {
 		rotation = r;
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void SetScale(Vector2f s) {
+	public Transform SetScale(Vector2f s) {
 		scale.set(s);
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void SetTranslation(float dx, float dy) {
+	public Transform SetTranslation(float dx, float dy) {
 		position.set(dx, dy);
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void SetScale(float sx, float sy) {
+	public Transform SetScale(float sx, float sy) {
 		scale.set(sx, sy);
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void Translate(Vector2f d) {
+	public Transform Translate(Vector2f d) {
 		position.add(d);
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void Rotate(float r) {
+	public Transform Rotate(float r) {
 		rotation += r;
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void Scale(Vector2f s) {
+	public Transform Scale(Vector2f s) {
 		scale.add(s);
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void Translate(float dx, float dy) {
+	public Transform Translate(float dx, float dy) {
 		position.add(dx, dy);
 		RecalculateMatrix();
+		return this;
 	}
 
-	public void Scale(float sx, float sy) {
+	public Transform Scale(float sx, float sy) {
 		scale.add(sx, sy);
 		RecalculateMatrix();
+		return this;
 	}
 
 	private void RecalculateMatrix() {

@@ -12,7 +12,9 @@ public abstract class Layer {
 	public void OnAttach() {}
 	public void OnUpdate(float dt) {}
 	public void OnRender() {}
+	public void OnRenderUI() {}
 	public void OnImGuiRender() {}
 	public void OnDetach() {}
+
 	public boolean OnLayerEvent(LayerEvent e) { return false; }
 }

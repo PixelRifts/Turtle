@@ -39,7 +39,7 @@ public class Sprite {
 	}
 
 	public void Render(Transform transform) {
-		Renderer.Submit(texture, uvRect, mixColour, transform);
+		Renderer.DrawTexture(texture, uvRect, mixColour, transform);
 	}
 
 	@Override

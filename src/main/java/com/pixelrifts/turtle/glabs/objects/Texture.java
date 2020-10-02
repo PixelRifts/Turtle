@@ -1,5 +1,6 @@
 package com.pixelrifts.turtle.glabs.objects;
 
+import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.stb.STBTTBakedChar;
 import org.lwjgl.system.MemoryStack;
@@ -11,19 +12,22 @@ import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.stb.STBImage.*;
 
 public class Texture {
-	public static final Texture White = new Texture("src/main/resources/White.png");
+	public static final Texture White = ResourceManager.ImportTexture("White.png");
 
 	private final int m_RendererID;
 	private final int m_Width;
 	private final int m_Height;
+	public final String m_Filepath;
 
 	private int m_TexSlot;
 
-	static {
-		stbi_set_flip_vertically_on_load(true);
+	public Texture(String filepath) {
+		this(filepath, true);
 	}
 
-	public Texture(String filepath) {
+	public Texture(String filepath, boolean shouldFlip) {
+		stbi_set_flip_vertically_on_load(shouldFlip);
+		m_Filepath = filepath;
 		try (MemoryStack stack = MemoryStack.stackPush()) {
 			IntBuffer w = stack.mallocInt(1);
 			IntBuffer h = stack.mallocInt(1);

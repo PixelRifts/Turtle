@@ -13,7 +13,6 @@ import imgui.enums.ImGuiMouseCursor;
 import imgui.gl3.ImGuiImplGl3;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_Z;
 
 public class ImGuiLayer extends Layer {
 	private ImGuiIO io;

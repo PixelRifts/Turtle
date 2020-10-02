@@ -1,6 +1,6 @@
 package com.pixelrifts.turtle;
 
-import com.pixelrifts.turtle.engine.base.BaseLayer;
+import com.pixelrifts.coloured.base.BaseLayer;
 import com.pixelrifts.turtle.engine.managers.ResourceManager;
 import com.pixelrifts.turtle.engine.rendering.Renderer;
 import com.pixelrifts.turtle.engine.rendering.UIRenderer;
@@ -44,6 +44,9 @@ public class RunTurtleEngine {
 			Renderer.Begin();
 			app.Render();
 			Renderer.End();
+			UIRenderer.Begin();
+			app.RenderUI();
+			UIRenderer.End();
 
 			imGui.StartFrame((float) delta);
 			app.ImGuiRender();

@@ -33,6 +33,10 @@ public class Application {
 		m_LayerStack.PropagateRender();
 	}
 
+	public void RenderUI() {
+		m_LayerStack.PropagateRenderUI();
+	}
+
 	public void ImGuiRender() {
 		m_LayerStack.PropagateImGuiRender();
 	}

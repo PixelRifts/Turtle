@@ -6,6 +6,13 @@ public class Rect {
 	public float width;
 	public float height;
 
+	public Rect() {
+		x = 0;
+		y = 0;
+		width = 1;
+		height = 1;
+	}
+
 	public Rect(float x, float y, float width, float height) {
 		this.x = x;
 		this.y = y;
@@ -37,6 +44,14 @@ public class Rect {
 	public Rect Scale(float sx, float sy) {
 		width *= sx;
 		height *= sy;
+		return this;
+	}
+
+	public Rect Div(float dx, float dy) {
+		x /= dx;
+		width /= dx;
+		y /= dy;
+		height /= dy;
 		return this;
 	}
 }

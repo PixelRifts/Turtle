@@ -15,6 +15,7 @@ public class GameObject {
 	private final List<Component> components;
 
 	public transient final boolean debug;
+	public transient boolean added;
 
 	public GameObject(String name) {
 		this(null, name);
@@ -30,12 +31,14 @@ public class GameObject {
 		this.children = new ArrayList<>();
 		this.components = new ArrayList<>();
 		this.debug = debug;
+		this.added = false;
 		transform = Transform.Identity;
 	}
 
 	public void AttachComponent(Component c) {
 		components.add(c);
 		c.gameObject = this;
+		if (added) c.Start();
 	}
 
 	public <T extends Component> T GetComponent(Class<T> clazz) {
